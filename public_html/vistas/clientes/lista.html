@@ -17,8 +17,7 @@
 	</div>
 	<div class="row">
 		<div  class="col-xs-8">
-			<h2>Lista de Clientes
-			</h2>
+			<h2>Lista de Clientes</h2>
 		</div>
 		<div class="col-xs-2">
 			<button class="btn btn-danger btn-sm pull-right" ng-click="nuevo()">Nuevo</button>
@@ -56,3 +55,7 @@
 			</table>
 		</div>
 	</div>
+	<div class="panel-body">
+			<div class="alert alert-success" role="alert" ng-show="showMsgOk">{{msgOk}}</div>
+			<div class="alert alert-danger" role="alert" ng-show="showMsgError">{{msgError}}</div>
+		</div>

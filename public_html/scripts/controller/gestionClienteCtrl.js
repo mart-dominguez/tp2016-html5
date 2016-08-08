@@ -4,10 +4,11 @@ angular.module('appTP')
 		 function($scope,  $location,clientesDAO,$routeParams) {
 			//funcion inicializadora
 			$scope.init = function(){
+				$scope.showMsgOk=false;
+				$scope.showMsgError=false;
 				$scope.edicionHabilitada = true;
 					if($routeParams.id==='add'){
 						$scope.operacion = "Nuevo Cliente";
-						console.log($routeParams.id+ " nuevo");
 					}else{
 						clientesDAO.buscar($routeParams.id)
 						.then(
@@ -19,14 +20,19 @@ angular.module('appTP')
 					};
 			};
 			$scope.guardar = function(){
-				console.log("guarda");
-				console.log($scope.cliente);
-				clientesDAO.guardar($scope.cliente);
+				clientesDAO.guardar($scope.cliente).then(
+					function(){ 
+						$scope.showMsgOk=true;
+						$scope.msgOk="Cliente guardado correctamente";
+					},
+					function(errMsg){ 
+						$scope.showMsgError=true;
+						$scope.msgError=errMsg;
+					}					
+				);
 				$scope.edicionHabilitada = false;	
 			};
 			$scope.actualizar = function(){
-				console.log("actualiza");
-				console.log($scope.cliente);
 				clientesDAO.actualizar($scope.cliente);		
 				$scope.edicionHabilitada = false;	
 			}
